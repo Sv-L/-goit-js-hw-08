@@ -15,7 +15,6 @@ function onInput(e) {
 
 if (localStorage.getItem(STORAGE_KEY)) {
   formState = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  console.log(formState);
   try {
     const { email, message } = JSON.parse(localStorage.getItem(STORAGE_KEY));
     formEl.email.value = email;
@@ -34,6 +33,6 @@ function onSubmit(e) {
     console.log(localStorage.getItem(STORAGE_KEY));
     e.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
-    // formState = {};
+    formState = {};
   }
 }
