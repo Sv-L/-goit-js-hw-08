@@ -32,5 +32,6 @@ function onSubmit(e) {
     console.log(localStorage.getItem(STORAGE_KEY));
     e.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
+    formState = {};
   }
 }
