@@ -18,9 +18,14 @@ function onInput(e) {
 }
 
 if (savedFormState) {
-  const { email, message } = JSON.parse(savedFormState);
-  formEl.email.value = email;
-  formEl.message.value = message;
+  try {
+    const { email, message } = JSON.parse(savedFormState);
+    formEl.email.value = email;
+    formEl.message.value = message;
+  } catch (error) {
+    console.log(error.name);
+    console.log(error.message);
+  }
 }
 
 function onSubmit(e) {
