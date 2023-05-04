@@ -15,22 +15,27 @@ function onInput(e) {
 
 if (localStorage.getItem(STORAGE_KEY)) {
   formState = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  try {
-    const { email, message } = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    formEl.email.value = email;
-    formEl.message.value = message;
-  } catch (error) {
-    console.log(error.name);
-    console.log(error.message);
+
+  const p = Object.keys(formState);
+
+  for (let i = 0; i < formEl.elements.length; i++) {
+    const element = formEl.elements[i];
+
+    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+      const fieldName = element.name;
+      if (p.includes(fieldName)) {
+        element.value = formState[fieldName];
+      }
+    }
   }
 }
 
 function onSubmit(e) {
   e.preventDefault();
-  if (formEl.email.value === '') {
-    return alert('Please fill the field "Email"!');
+  if (formEl.email.value === '' || formEl.message.value === '') {
+    return alert('Please fill in all the fields!');
   } else {
-    console.log(localStorage.getItem(STORAGE_KEY));
+    console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
     e.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
     formState = {};
