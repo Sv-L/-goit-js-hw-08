@@ -1,21 +1,20 @@
 import throttle from 'lodash.throttle';
 
-const STORAGE_KEY = 'feedback-form-state';
 const formEl = document.querySelector('.feedback-form');
 const throttleOnInput = throttle(onInput, 500);
-const savedFormState = localStorage.getItem(STORAGE_KEY);
-let formState = {};
+const STORAGE_KEY = 'feedback-form-state';
+
 formEl.addEventListener('input', throttleOnInput);
 formEl.addEventListener('submit', onSubmit);
-
+let formState = {};
 function onInput(e) {
   formState[e.target.name] = e.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formState));
 }
 
-if (savedFormState) {
+if (localStorage.getItem(STORAGE_KEY)) {
   try {
-    const { email, message } = JSON.parse(savedFormState);
+    const { email, message } = JSON.parse(localStorage.getItem(STORAGE_KEY));
     formEl.email.value = email;
     formEl.message.value = message;
   } catch (error) {
@@ -29,7 +28,7 @@ function onSubmit(e) {
   if (formEl.email.value === '') {
     return alert('Please fill the field "Email"!');
   } else {
-    console.log(savedFormState);
+    console.log(localStorage.getItem(STORAGE_KEY));
     e.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
   }
