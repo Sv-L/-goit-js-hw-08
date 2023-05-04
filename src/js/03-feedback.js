@@ -8,12 +8,10 @@ const throttleOnInput = throttle(onInput, 500);
 
 formEl.addEventListener('input', throttleOnInput);
 formEl.addEventListener('submit', onSubmit);
-
 let formState = {};
 function onInput(e) {
   formState[e.target.name] = e.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formState));
-  console.log(formState);
 }
 
 if (savedFormState) {
