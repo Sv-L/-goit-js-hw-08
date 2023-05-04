@@ -16,14 +16,14 @@ function onInput(e) {
 if (localStorage.getItem(STORAGE_KEY)) {
   formState = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-  const p = Object.keys(formState);
+  const formStateKeys = Object.keys(formState);
 
   for (let i = 0; i < formEl.elements.length; i++) {
     const element = formEl.elements[i];
 
     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
       const fieldName = element.name;
-      if (p.includes(fieldName)) {
+      if (formStateKeys.includes(fieldName)) {
         element.value = formState[fieldName];
       }
     }
