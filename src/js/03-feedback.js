@@ -41,12 +41,32 @@ function onInput(e) {
 
 function onSubmit(e) {
   e.preventDefault();
-  if (formEl.email.value === '' || formEl.message.value === '') {
-    return alert('Please fill in all the fields!');
-  } else {
+  if (checkFormFill(e.currentTarget)) {
     console.log(parseStorage(STORAGE_KEY));
     e.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
     formState = {};
+  }
+}
+
+function checkFormFill(form) {
+  let isFormValid = true;
+  for (let i = 0; i < form.elements.length; i++) {
+    const element = form.elements[i];
+
+    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+      const fieldValue = element.value.trim();
+      if (fieldValue === '') {
+        isFormValid = false;
+        break;
+      }
+    }
+  }
+  if (isFormValid) {
+    console.log('Form is valid');
+    return true;
+  } else {
+    alert('Please fill in all the fields!');
+    return false;
   }
 }
