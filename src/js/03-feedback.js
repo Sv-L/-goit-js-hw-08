@@ -24,7 +24,7 @@ if (localStorage.getItem(STORAGE_KEY)) {
   for (let i = 0; i < formEl.elements.length; i++) {
     const element = formEl.elements[i];
 
-    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+    if (element.tagName === 'input' || element.tagName === 'textarea') {
       const fieldName = element.name;
       if (formStateKeys.includes(fieldName)) {
         element.value = formState[fieldName];
