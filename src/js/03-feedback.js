@@ -9,12 +9,16 @@ formEl.addEventListener('input', throttleOnInput);
 formEl.addEventListener('submit', onSubmit);
 
 if (localStorage.getItem(STORAGE_KEY)) {
+  formState = parseStorage(STORAGE_KEY);
+  fillFormFields(formState, formEl);
+}
+
+function parseStorage(storageKey) {
   try {
-    formState = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return JSON.parse(localStorage.getItem(storageKey));
   } catch (error) {
     console.log(error);
   }
-  fillFormFields(formState, formEl);
 }
 
 function fillFormFields(storageValue, form) {
@@ -40,11 +44,7 @@ function onSubmit(e) {
   if (formEl.email.value === '' || formEl.message.value === '') {
     return alert('Please fill in all the fields!');
   } else {
-    try {
-      console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(parseStorage(STORAGE_KEY));
     e.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
     formState = {};
