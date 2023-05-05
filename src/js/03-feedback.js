@@ -1,4 +1,4 @@
-import { checkFormFill } from './04-checkformfield';
+import { checkFormFill } from './checkformfield';
 import throttle from 'lodash.throttle';
 
 const formEl = document.querySelector('.feedback-form');
