@@ -63,7 +63,6 @@ function checkFormFill(form) {
     }
   }
   if (isFormValid) {
-    console.log('Form is valid');
     return true;
   } else {
     alert('Please fill in all the fields!');
