@@ -14,8 +14,11 @@ function onInput(e) {
 }
 
 if (localStorage.getItem(STORAGE_KEY)) {
-  formState = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
+  try {
+    formState = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  } catch (error) {
+    console.log(error);
+  }
   const formStateKeys = Object.keys(formState);
 
   for (let i = 0; i < formEl.elements.length; i++) {
@@ -35,7 +38,11 @@ function onSubmit(e) {
   if (formEl.email.value === '' || formEl.message.value === '') {
     return alert('Please fill in all the fields!');
   } else {
-    console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+    try {
+      console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+    } catch (error) {
+      console.log(error);
+    }
     e.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
     formState = {};
