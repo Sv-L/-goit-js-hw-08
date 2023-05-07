@@ -24,14 +24,8 @@ function parseStorage(storageKey) {
 
 function fillFormFields(storageValue, form) {
   const formStateKeys = Object.keys(storageValue);
-  for (let i = 0; i < form.elements.length; i++) {
-    const element = form.elements[i];
-    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-      const fieldName = element.name;
-      if (formStateKeys.includes(fieldName)) {
-        element.value = storageValue[fieldName];
-      }
-    }
+  for (const key of formStateKeys) {
+    form.elements[key].value = storageValue[key];
   }
 }
 
